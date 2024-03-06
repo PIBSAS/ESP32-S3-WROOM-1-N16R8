@@ -49,12 +49,16 @@ Tested on Ubuntu 22.04.
    ```
 
    ```bash
-    . $HOME/esp/esp-idf/export.sh
+    . ./export.sh
    ```
    o creamos un alias para luego tambien poder usarlo para programar.
 
    ```bash
    alias get_idf='. $HOME/esp/esp-idf/export.sh'
+   ```
+
+   ```bash
+   idf.py build
    ```
    
 5. Copy GENERIC_S3_N16R8 to micropython/ports/esp32/boards:
