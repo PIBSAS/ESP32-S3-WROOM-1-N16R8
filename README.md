@@ -29,9 +29,9 @@ Tested on Ubuntu 22.04.
    git clone https://github.com/PIBSAS/ESP32-S3-WROOM-1-N16R8.git
    ```
 
-3. Install esp-idf v4.4:
+3. Install esp-idf:
 
-   [Link](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html)
+   [Link](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/linux-macos-setup.html)
 
    ```bash
    sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
@@ -45,13 +45,17 @@ Tested on Ubuntu 22.04.
 
    ```bash
    cd ~/esp/esp-idf
-   ./install.sh all
+   ./install.sh esp32s3
    ```
 
    ```bash
     . $HOME/esp/esp-idf/export.sh
    ```
+   o creamos un alias para luego tambien poder usarlo para programar.
 
+   ```bash
+   alias get_idf='. $HOME/esp/esp-idf/export.sh'
+   ```
    
 5. Copy GENERIC_S3_N16R8 to micropython/ports/esp32/boards:
    
