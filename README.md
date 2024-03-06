@@ -32,6 +32,8 @@ Tested on Ubuntu 22.04.
 3. Install esp-idf:
 
    [Link](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/linux-macos-setup.html)
+   [Link](https://github.com/micropython/micropython/blob/master/ports/esp32/README.md)
+   
 
    ```bash
    sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
@@ -40,7 +42,7 @@ Tested on Ubuntu 22.04.
    ```bash
    mkdir -p ~/esp
    cd ~/esp
-   git clone --recursive https://github.com/espressif/esp-idf.git
+   git clone -b v5.0.4 --recursive https://github.com/espressif/esp-idf.git
    ```
 
    ```bash
@@ -53,6 +55,7 @@ Tested on Ubuntu 22.04.
    ```
    o creamos un alias para luego tambien poder usarlo para programar.
 
+   ### Opcional para usar esp-IDF:
    ```bash
    alias get_idf='. $HOME/esp/esp-idf/export.sh'
    ```
@@ -60,6 +63,7 @@ Tested on Ubuntu 22.04.
    ```bash
    idf.py build
    ```
+   Fin del opcional, continuar con:
    
 5. Copy GENERIC_S3_N16R8 to micropython/ports/esp32/boards:
    
