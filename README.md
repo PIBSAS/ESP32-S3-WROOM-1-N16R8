@@ -33,13 +33,29 @@ Tested on Ubuntu 22.04.
 
    [Link](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/get-started/linux-macos-setup.html)
 
-4. Copy GENERIC_S3_N16R8 to micropython/ports/esp32/boards:
+   ``sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0``
+
+   ``
+   mkdir -p ~/esp
+   cd ~/esp
+   git clone --recursive https://github.com/espressif/esp-idf.git
+   ``
+
+   ``
+   cd ~/esp/esp-idf
+   ./install.sh all
+   ``
+
+   `` . $HOME/esp/esp-idf/export.sh ``
+
+   
+5. Copy GENERIC_S3_N16R8 to micropython/ports/esp32/boards:
    
    ```bash
    cp -r MicroPython-ESP32-S3-N16R8/GENERIC_S3_N16R8 micropython/ports/esp32/boards
    ```
 
-5. Build:
+6. Build:
    
    ```bash
    cd micropython/ports/esp32
