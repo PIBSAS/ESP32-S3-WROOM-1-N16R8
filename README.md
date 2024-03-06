@@ -26,7 +26,7 @@ Tested on Ubuntu 22.04.
 
    ```bash
    git clone https://github.com/micropython/micropython.git
-   git clone https://github.com/Mythologyli/MicroPython-ESP32-S3-N16R8.git
+   git clone https://github.com/PIBSAS/ESP32-S3-WROOM-1-N16R8.git
    ```
 
 3. Install esp-idf v4.4:
