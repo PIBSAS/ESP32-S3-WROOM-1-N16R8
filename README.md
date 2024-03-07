@@ -14,6 +14,7 @@
 ## MicroPython
 - [Link](https://github.com/micropython/micropython/blob/master/ports/esp32/README.md)
 
+
 # MicroPython ESP32-S3 N16R8
 
 # Probado en--Tested on Ubuntu WSL 2024:
@@ -47,7 +48,7 @@ cd esp
 git clone -b v5.0.4 --recursive https://github.com/espressif/esp-idf.git
 ```
 
-### Instalar CMake mediante--Install CMake with idf_tools.py:
+### Instalar CMake mediante--Install CMake with ``idf_tools.py``:
 
 ```bash
 cd esp-idf/tools
@@ -68,8 +69,8 @@ cd ..
 . ./export.sh
 ```
 
-### Copiar el directorio GENERIC_S3_N16R8 y su contenido al directorio boards:
-### Copy recursively GENERIC_S3_N16R8 folder and his content to boards folder:
+### Copiar el directorio ``GENERIC_S3_N16R8`` y su contenido al directorio boards:
+### Copy recursively ``GENERIC_S3_N16R8`` folder and his content to boards folder:
 
 ```bash
 cd
@@ -95,14 +96,14 @@ cd ports/esp32/
 make submodules
 ```
 
-### Indicar el IDF_TARGET:
-### Indicate IDF_TARGET:
+### Indicar el ``IDF_TARGET``:
+### Indicate ``IDF_TARGET``:
 
 ```bash
 export IDF_TARGET=esp32s3
 ```
 
-### Compillar MicroPython para ESP32 S3:
+### Compilar MicroPython para ESP32 S3:
 ### Compile MicroPython for ESP32 S3:
 
 ```bash
@@ -162,14 +163,14 @@ usbipd attach --wsl --busid 2-1
 ```
 
 ### En WSL Ubuntu(Distro) agregar el usuario al grupo ``dialout``:
-### On WSL Ubuntu add user to dialout group:
+### On WSL Ubuntu add user to ``dialout`` group:
 
 ```bash
 sudo adduser $USER dialout
 ```
 
-### En Terminal(Administrador) Comprobar que figure Attached en la columna STATE con:
-### On Teminal(Admin) Verify Attached on STATE column with:
+### En Terminal(Administrador) Comprobar que figure ``Attached`` en la columna ``STATE`` con:
+### On Teminal(Admin) Verify ``Attached`` on ``STATE`` column with:
 
 ```bash
 usbipd list
