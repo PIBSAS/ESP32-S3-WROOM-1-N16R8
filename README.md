@@ -100,7 +100,7 @@ $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/co
 |-------------|-------------|-------------------------------|
 | partitions  | @0x008000   |   3072  (    1024 remaining)  |
 | application | @0x010000   | 1396208  (  635408 remaining) |
-| total                     | 1461744                       |
+| total       |             | 1461744                       |
 
 - Se debe cambiar ``(PORT)`` por ``COM29`` por ejemplo o en linux ``/dev/ttyACM0``
 
