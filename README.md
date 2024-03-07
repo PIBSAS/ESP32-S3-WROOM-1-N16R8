@@ -52,7 +52,7 @@ Tested on Ubuntu 22.04.
 
    ```bash
    . $HOME/esp/esp-idf/export.sh
-    . ./export.sh
+   . ./export.sh
    ```
    o creamos un alias para luego tambien poder usarlo para programar.
 
