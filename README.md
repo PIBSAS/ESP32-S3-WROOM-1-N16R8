@@ -112,6 +112,7 @@ export IDF_TARGET=esp32s3
 ### Compile MicroPython for ESP32 S3:
 
 ```bash
+make BOARD=GENERIC_S3_N16R8 submodules
 make BOARD=GENERIC_S3_N16R8
 ```
 
