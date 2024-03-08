@@ -90,6 +90,13 @@ Basado en--Based on:
   cd micropython/
   make -C mpy-cross
   ```
+  
+### Indicar el ``IDF_TARGET``:
+### Indicate ``IDF_TARGET``:
+
+- ```bash
+  export IDF_TARGET=esp32s3
+  ```
 
 ### Movernos a ports/esp32 y ejecutar submodules:
 ### Move to ports/esp32 and make submodules:
@@ -99,13 +106,6 @@ Basado en--Based on:
   ```
 - ```bash
   make submodules
-  ```
-
-### Indicar el ``IDF_TARGET``:
-### Indicate ``IDF_TARGET``:
-
-- ```bash
-  export IDF_TARGET=esp32s3
   ```
 
 ### Compilar MicroPython para ESP32 S3:
