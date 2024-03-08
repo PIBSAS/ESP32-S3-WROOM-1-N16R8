@@ -5,14 +5,19 @@
     "docs": "",
     "features": [
         "BLE",
+        "External Flash",
+        "External RAM",
         "WiFi"
     ],
     "images": [
         "generic_s3.jpg"
     ],
     "mcu": "esp32s3",
-    "product": "Generic ESP32-S3 (SPIRAM)",
+    "product": "Generic ESP32-S3-WROOM-1 N16R8",
     "thumbnail": "",
     "url": "https://www.espressif.com/en/products/modules",
-    "vendor": "Espressif"
+    "vendor": "Espressif",
+    "variants": {
+        "SPIRAM_OCT": "Support for Octal-SPIRAM"
+    }
 }
