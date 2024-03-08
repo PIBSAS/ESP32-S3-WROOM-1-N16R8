@@ -1,4 +1,7 @@
 # ESP32-S3-WROOM-1-N16R8
+Basado en:
+- https://github.com/Mythologyli/MicroPython-ESP32-S3-N16R8
+
 
 ## Datasheet:
 
@@ -199,3 +202,6 @@ $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/co
 ## Reference
 
 + [micropython/micropython/issues/8635](https://github.com/micropython/micropython/issues/8635#issuecomment-1129218506)
+
+## Resultado--Result:
+![ESP32-S3-WROOM-1 N16R8 Compilation](Captura.png)
