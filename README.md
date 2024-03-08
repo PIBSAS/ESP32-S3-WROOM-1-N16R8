@@ -1,21 +1,21 @@
 # ESP32-S3-WROOM-1-N16R8
-Basado en:
-- https://github.com/Mythologyli/MicroPython-ESP32-S3-N16R8
+Basado en--Based on:
+- [Mythologyli](https://github.com/Mythologyli/MicroPython-ESP32-S3-N16R8)
 
 
 ## Datasheet:
 
-- https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf
+- [ESP-S#-WROOM-1/1U](https://www.espressif.com/sites/default/files/documentation/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf)
 
 ## Docs:
-- https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html
+- [ESP-S3 User Guide DevKitC v1.1](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html)
 
 ![ESP32-S3-WROOM-1 N16R8 DevKitC v1.1](ESP32-S3_DevKitC-1.1.png)
 
 ## ESP-IDF:
-- [Link](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/linux-macos-setup.html)
+- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/linux-macos-setup.html)
 ## MicroPython
-- [Link](https://github.com/micropython/micropython/blob/master/ports/esp32/README.md)
+- [MicroPython](https://github.com/micropython/micropython/blob/master/ports/esp32/README.md)
 
 
 # MicroPython ESP32-S3 N16R8
@@ -236,7 +236,8 @@ Just Download the Firmware ZIP file, Unzip and read the How To text file.
   ```
 
 
-> :warning: **For pip on newest OSes you need to make virtual environment:**
+
+> :warning: For pip on newest OSes you need to make virtual environment:
 
 ### Windows:
 - ```bash
@@ -259,4 +260,4 @@ Once activated install esptool:
 - (esp-env) ...$: ```pip install esptool```
 
 ### ESP Tool Docs:
-https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool
+[ESP Tool Documentation](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool)
