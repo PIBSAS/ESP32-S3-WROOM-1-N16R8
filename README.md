@@ -22,7 +22,9 @@ Basado en--Based on:
 
 # Probado en--Tested on Ubuntu WSL 2024:
 
-- ``` wsl --install Ubuntu ```
+- ```bash
+  wsl --install Ubuntu
+  ```
 
 
 ### Una vez instalado Ubuntu--Once Installed Ubuntu:
