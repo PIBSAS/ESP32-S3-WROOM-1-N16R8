@@ -79,7 +79,7 @@ cd ..
 
 ```bash
 cd
-cp -r MicroPython-ESP32-S3-N16R8/GENERIC_S3_N16R8 micropython/ports/esp32/boards
+cp -r ESP32-S3-WROOM-1-N16R8/GENERIC_S3_N16R8 micropython/ports/esp32/boards
 ```
 
 ### Dirigirnos al directorio MicroPython y ejecutar mpy-cross:
