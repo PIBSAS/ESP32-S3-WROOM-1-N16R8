@@ -205,3 +205,58 @@ $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/co
 
 ## Resultado--Result:
 ![ESP32-S3-WROOM-1 N16R8 Compilation](Captura.png)
+
+
+# The Lazy way:
+Just Download the Firmware ZIP file, Unzip and read the How To text file.
+
+!!!Files need to be where is esptool or type full path of files!!!
+
+## Install ESPtool:
+- ```bash
+  pip install esptool
+  ```
+
+### Replace (PORT) with yours Linux: /dev/ttyACM0 Windows: COM12 (After com goes the number detected on your pc)
+
+### Erase flash:
+- Linux(On Ubuntu python3 instead just python): python esptool.py -p  erase_flash
+- Windows: python esptool.py -p (PORT) erase_flash
+- Windows with Virtual Environment: esptool -p (PORT) erase_flash
+
+
+### Flash:
+- ```bash
+  python esptool.py -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
+  ```
+
+#### Windows with Virtual Environment:
+- ```bash
+  esptool -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
+  ```
+
+
+> :warning: **For pip on newest OSes you need to make virtual environment:**
+
+### Windows:
+- ```bash
+  python -m venv esp-env
+  ```
+or
+- ```bash
+  py -m venv esp-env
+  .\esp-env\Scripts\activate
+Once activated install esptool:
+- (esp-env)PS C:....> ```pip install esptool```
+
+
+### Linux:
+- ```bash
+  python .m venv esp-env
+  source esp-env
+  ```
+Once activated install esptool:
+- (esp-env) ...$: ```pip install esptool```
+
+### ESP Tool Docs:
+https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool
