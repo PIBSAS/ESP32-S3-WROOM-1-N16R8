@@ -5,7 +5,7 @@ set(SDKCONFIG_DEFAULTS
     ${SDKCONFIG_IDF_VERSION_SPECIFIC}
     boards/sdkconfig.usb
     boards/sdkconfig.ble
-    boards/GENERIC_S3_N16R8/sdkconfig.spiram_sx
+    boards/sdkconfig.spiram_sx
     boards/GENERIC_S3_N16R8/sdkconfig.board
     boards/sdkconfig.240mhz
     boards/sdkconfig.spiram_oct
