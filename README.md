@@ -14,6 +14,7 @@ Basado en--Based on:
 
 ## ESP-IDF:
 - [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/linux-macos-setup.html)
+  
 ## MicroPython
 - [MicroPython](https://github.com/micropython/micropython/blob/master/ports/esp32/README.md)
 
@@ -25,7 +26,7 @@ Basado en--Based on:
 - ```bash
   wsl --install Ubuntu
   ```
-
+![Wsl](media/Wsl.png)
 
 ### Una vez instalado Ubuntu--Once Installed Ubuntu:
 
@@ -34,9 +35,12 @@ Basado en--Based on:
 - ```bash
   sudo apt update && sudo apt upgrade -y
   ```
+  ![Update](media/Update.png)
+  
 - ```bash
   sudo apt install -y build-essential git wget flex bison gperf pkg-config python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
   ```
+  ![Dependencias](media/Dependencies.png)
 
 
 ### Clonar ésta--Clone this repo, MicroPython y ESP-IDF compatible con MicroPython(En la actualidad "Micropython 1.22" 5.04 a 5.2):
@@ -45,10 +49,12 @@ Basado en--Based on:
   git clone https://github.com/PIBSAS/ESP32-S3-WROOM-1-N16R8.git
   ```
   ![Clone Repo](media/Clone_Repo.png)
+  
 - ```bash
   git clone https://github.com/micropython/micropython.git
   ```
   ![Clone Micropython](media/Clone_Micropython.png)
+  
 - ```bash
   mkdir esp
   cd esp
