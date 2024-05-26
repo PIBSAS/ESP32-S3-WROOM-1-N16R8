@@ -54,7 +54,8 @@ Basado en--Based on:
   git clone https://github.com/micropython/micropython.git
   ```
   ![Clone Micropython](media/Clone_Micropython.png)
-  
+
+  ### ESP-IDF v5.0.4:
 - ```bash
   mkdir esp
   cd esp
@@ -62,6 +63,12 @@ Basado en--Based on:
   ```
   ![Clone ESP-IDF](media/Clone_ESP-IDF.png)
 
+### ESP-IDF v5.2:
+- ```bash
+  mkdir esp
+  cd esp
+  git clone -b v5.2 --recursive https://github.com/espressif/esp-idf.git
+  ```
 ### Instalar CMake mediante--Install CMake with ``idf_tools.py``:
 
 - ```bash
@@ -114,7 +121,7 @@ Basado en--Based on:
 - ```bash
   export IDF_TARGET=esp32s3
   ```
-![IDF-Target](IDF_Target.png)
+![IDF-Target](media/IDF_Target.png)
 
 ### Movernos a ports/esp32 y ejecutar submodules:
 ### Move to ports/esp32 and make submodules:
@@ -136,7 +143,8 @@ Basado en--Based on:
   ```
 ![Makes](media/Makes.png)
 
-#### Al final nos indica--At the end show us:
+#### Al final con ESP-IDF v5.0.4 nos indica:
+#### At the end show us with ESP-IDF v5.0.4:
 
 - Project build complete. To flash, run this command:
 - ```bash
@@ -154,7 +162,17 @@ Basado en--Based on:
 
 - Se debe cambiar ``(PORT)`` por ``COM29`` por ejemplo o en linux ``/dev/ttyACM0``
 
+#### Al final con ESP-IDF v5.2 nos indica:
+#### At the end show us with ESP-IDF v5.2:
+
+- Project build complete. To flash, run this command:
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  ```
+![Success](media/Success_ESP-IDFv5.2.png)
+
 # Windows:
+## ESP-IDF v5.0.4:
 ## Borramos la flash:
 ## Erase flash:
 - ```bash
@@ -168,6 +186,10 @@ Basado en--Based on:
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p COM29 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
   ```
 ![Flash](media/Flash.png)
+
+## ESP-IDF v5.2:
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin```
 
 # WSL:
 
@@ -208,7 +230,7 @@ Basado en--Based on:
 - ```bash
   usbipd list
   ```
-
+## ESP-IDF v5.0.4:
 ### Luego en WSL borramos la flash:
 ### Then on WSL erase the flash:
 
@@ -221,6 +243,10 @@ Basado en--Based on:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
   ```
+
+## ESP-IDF v5.2:
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin```
 
 #### After flash detach the board with usbipd so is available for Windows:
 - ```bash
@@ -242,8 +268,11 @@ Basado en--Based on:
 
 ## Resultado--Result:
 ![ESP32-S3-WROOM-1 N16R8 Compilation](Captura.png)
+### ESP-IDF v5.0.4:
 ![ESP32S3-WROOM-1 N16R8 18Mb RAM 8Mb PSRAM](media/Resultado.png)
 
+### ESP-IDF v5.2:
+![ESP32S3-WROOM-1 N16R8 18Mb RAM 8Mb PSRAM](media/Resultado_5_2.png)
 
 # The Lazy way:
 - Just Download the Firmware ZIP file, Unzip and read the How To text file.
