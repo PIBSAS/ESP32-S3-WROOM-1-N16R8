@@ -55,7 +55,7 @@ Basado en--Based on:
   ```
   ![Clone Micropython](media/Clone_Micropython.png)
 
-  ### ESP-IDF v5.0.4:
+### ESP-IDF v5.0.4:
 - ```bash
   mkdir esp
   cd esp
@@ -81,7 +81,7 @@ Basado en--Based on:
   ![CMAKE Install](media/CMAKE_Install.png)
 
 ### Regresar un directorio y ejuctar el script para ESP32S3
-### Back a directory and execute the Script for ESP32S3:
+### Back a directory and execute the Script for ESP32S3
 
 - ```bash
   cd ..
@@ -172,24 +172,27 @@ Basado en--Based on:
 ![Success](media/Success_ESP-IDFv5.2.png)
 
 # Windows:
+
 ## ESP-IDF v5.0.4:
-## Borramos la flash:
-## Erase flash:
+### Borramos la flash:
+### Erase flash:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 erase_flash
   ```
 ![Erase Flash](media/Erase.png)
 
-## Luego flasheamos:
-## Then flash:
+### Luego flasheamos:
+### Then flash:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p COM29 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
   ```
 ![Flash](media/Flash.png)
 
 ## ESP-IDF v5.2:
+
 - ```bash
-  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin```
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  ```
 
 # WSL:
 
