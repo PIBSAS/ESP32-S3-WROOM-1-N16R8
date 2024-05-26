@@ -43,7 +43,7 @@ Basado en--Based on:
   ![Dependencias](media/Dependencies.png)
 
 
-### Clonar ésta--Clone this repo, MicroPython y ESP-IDF compatible con MicroPython(En la actualidad "Micropython 1.22" 5.04 a 5.2):
+### Clonar ésta--Clone this repo, MicroPython y ESP-IDF compatible con MicroPython(En la actualidad "Micropython 1.23" 5.04 a 5.2):
 
 - ```bash
   git clone https://github.com/PIBSAS/ESP32-S3-WROOM-1-N16R8.git
