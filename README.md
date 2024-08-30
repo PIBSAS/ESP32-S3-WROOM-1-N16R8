@@ -69,6 +69,14 @@ Basado en--Based on:
   cd esp
   git clone -b v5.2 --recursive https://github.com/espressif/esp-idf.git
   ```
+
+### ESP-IDF v5.2.2:
+- ```bash
+  mkdir esp
+  cd esp
+  git clone -b v5.2.2 --recursive https://github.com/espressif/esp-idf.git
+  ```
+
 ### Instalar CMake mediante--Install CMake with ``idf_tools.py``:
 
 - ```bash
