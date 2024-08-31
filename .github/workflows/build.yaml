@@ -5,15 +5,17 @@ permissions:
 
 on:
   push:
-    branches:
-      - main
+  #  branches:
+   #   - main
     tags:
-      - 'v*'
-  pull_request:
-    branches:
-      - main
+     - 'v*'
+  #pull_request:
+   # branches:
+    #  - main
   schedule:
-    - cron: '0 0 * * 0'  # Se ejecutará a las 00:00 UTC cada domingo
+     - cron: '0 0 * * 0'  # Se ejecutará a las 00:00 UTC cada domingo
+  
+  workflow_dispatch:  # Permite ejecutar manualmente el flujo de trabajo
 
 jobs:
   build:
