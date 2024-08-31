@@ -147,6 +147,8 @@ Basado en--Based on:
 
 - ```bash
   make BOARD=ESP32_GENERIC_S3_N16R8 submodules
+  ```
+  ```bash
   make BOARD=ESP32_GENERIC_S3_N16R8
   ```
 ![Makes](media/Makes.png)
