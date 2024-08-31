@@ -1,0 +1,76 @@
+name: ESP32 MicroPython
+
+permissions:
+  contents: write
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar el repositorio
+      uses: actions/checkout@v3
+      
+    - name: Clonar Micropython
+      run: git clone --recurse-submodules https://github.com/micropython/micropython.git
+      
+    - name: Instalar dependencias
+      run: |
+       sudo apt update && sudo apt upgrade -y
+       sudo apt install -y build-essential git wget flex bison gperf pkg-config python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+    - name: Clonar ESP-IDF
+      run: |
+        mkdir -p esp
+        cd esp
+        git clone -b v5.2.2 --recursive https://github.com/espressif/esp-idf.git
+        cd esp-idf/tools
+        python3 idf_tools.py install cmake
+        cd ..
+        ./install.sh esp32s3
+        cd
+
+
+    - name: Copiar configuracion
+      run: |
+        cp -r ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards/
+
+    - name: Compilar
+      run: |
+        source esp/esp-idf/export.sh
+        cd micropython/
+        make -C mpy-cross
+        export IDF_TARGET=esp32s3
+        cd ports/esp32/
+        idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -B build-ESP32_GENERIC_S3_N16R8 build
+
+    
+    - name: Mover binarios
+      run: |
+        mkdir -p ./artifacts
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin ./artifacts/
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/
+
+    - name: Generate Tag
+      id: tag
+      run: echo "TAG_NAME=release-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+      
+    - name: Create Release
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
+        title: "Release for version ${{ env.TAG_NAME }}"
+        files: ./artifacts/*
