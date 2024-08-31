@@ -55,6 +55,7 @@ Basado en--Based on:
   ```
   ![Clone Micropython](media/Clone_Micropython.png)
 
+
 ### ESP-IDF v5.0.4:
 - ```bash
   mkdir esp
@@ -63,6 +64,7 @@ Basado en--Based on:
   ```
   ![Clone ESP-IDF](media/Clone_ESP-IDF.png)
 
+
 ### ESP-IDF v5.2:
 - ```bash
   mkdir esp
@@ -70,12 +72,14 @@ Basado en--Based on:
   git clone -b v5.2 --recursive https://github.com/espressif/esp-idf.git
   ```
 
+
 ### ESP-IDF v5.2.2:
 - ```bash
   mkdir esp
   cd esp
   git clone -b v5.2.2 --recursive https://github.com/espressif/esp-idf.git
   ```
+
 
 ### Instalar CMake mediante--Install CMake with ``idf_tools.py``:
 
@@ -104,12 +108,12 @@ Basado en--Based on:
   ```
 ![Export Script](media/Export.png)
 
-### Copiar el directorio ``GENERIC_S3_N16R8`` y su contenido al directorio boards:
-### Copy recursively ``GENERIC_S3_N16R8`` folder and his content to boards folder:
+### Copiar el directorio ``ESP32_GENERIC_S3_N16R8`` y su contenido al directorio boards:
+### Copy recursively ``ESP32_GENERIC_S3_N16R8`` folder and his content to boards folder:
 
 - ```bash
   cd
-  cp -r ESP32-S3-WROOM-1-N16R8/GENERIC_S3_N16R8 micropython/ports/esp32/boards
+  cp -r ESP32-S3-WROOM-1-N16R8/ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards
   ```
 ![Copy](media/Copy_Repo.png)
 
@@ -131,16 +135,12 @@ Basado en--Based on:
   ```
 ![IDF-Target](media/IDF_Target.png)
 
-### Movernos a ports/esp32 y ejecutar submodules:
-### Move to ports/esp32 and make submodules:
+### Movernos a ports/esp32:
+### Move to ports/esp32:
 
 - ```bash
   cd ports/esp32/
   ```
-- ```bash
-  make submodules
-  ```
-![Make submodules](media/Sub.png)
 
 ### Compilar MicroPython para ESP32 S3:
 ### Compile MicroPython for ESP32 S3:
@@ -156,9 +156,9 @@ Basado en--Based on:
 
 - Project build complete. To flash, run this command:
 - ```bash
-  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
-![Success](media/Success.png)
+![Success-Changed to new name folder](media/Success.png)
 
 #### Or run 'idf.py -p (PORT) flash':
 
@@ -170,12 +170,13 @@ Basado en--Based on:
 
 - Se debe cambiar ``(PORT)`` por ``COM29`` por ejemplo o en linux ``/dev/ttyACM0``
 
+
 #### Al final con ESP-IDF v5.2 nos indica:
 #### At the end show us with ESP-IDF v5.2:
 
 - Project build complete. To flash, run this command:
 - ```bash
-  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 ![Success](media/Success_ESP-IDFv5.2.png)
 
@@ -192,14 +193,14 @@ Basado en--Based on:
 ### Luego flasheamos:
 ### Then flash:
 - ```bash
-  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p COM29 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p COM29 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 ![Flash](media/Flash.png)
 
 ## ESP-IDF v5.2:
 
 - ```bash
-  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 
 # WSL:
@@ -210,7 +211,7 @@ Basado en--Based on:
   winget install --interactive --exact dorssel.usbipd-win
   ```
 
-### Abrir Terminal(Administrador) enchufar el ESP32 y escribir:
+### Abrir Terminal(Administrador) conectar el ESP32 y escribir:
 ### Open Terminasl(Admin) plug ESP32 and type:
 
 - ```bash
@@ -252,12 +253,12 @@ Basado en--Based on:
 ### Luego flasheamos:
 ### Then flash:
 - ```bash
-  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 
 ## ESP-IDF v5.2:
 - ```bash
-  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```  
 
 #### After flash detach the board with usbipd so is available for Windows:
@@ -271,7 +272,7 @@ Basado en--Based on:
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 erase_flash
   ```
 - ```bash
-  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-GENERIC_S3_N16R8/micropython.bin
+  $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 
 ## Reference
@@ -287,7 +288,7 @@ Basado en--Based on:
 ![ESP32S3-WROOM-1 N16R8 18Mb RAM 8Mb PSRAM](media/Resultado_5_2.png)
 
 # The Lazy way:
-- Just Download the Firmware ZIP file, Unzip and read the How To text file.
+- Just Download the Firmware ZIP file(old now[August 2024]), Unzip and read the How To text file.
 
 > :warning: Files need to be where is esptool or type full path of files ⚠️
 
@@ -296,22 +297,22 @@ Basado en--Based on:
   pip install esptool
   ```
 
-### Replace (PORT) with yours Linux: /dev/ttyACM0 Windows: COM12 (After com goes the number detected on your pc)
+### Replace (PORT)"Doesn't need port", with yours Linux: /dev/ttyACM0 Windows: COM12 (After com goes the number detected on your pc)
 
 ### Erase flash:
-- Linux(On Ubuntu python3 instead just python): python esptool.py -p  erase_flash
-- Windows: python esptool.py -p (PORT) erase_flash
-- Windows with Virtual Environment: esptool -p (PORT) erase_flash
+- Linux(On Ubuntu python3 instead just python): ````python -m esptool erase_flash````
+- Windows: ````python -m esptool erase_flash````
+- Windows with Virtual Environment: ````esptool erase_flash````
 
 
 ### Flash:
 - ```bash
-  python esptool.py -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
+  python -m esptool -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
   ```
 
 #### Windows with Virtual Environment:
 - ```bash
-  esptool -p (PORT) -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
+  esptool -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 micropython.bin
   ```
 
 
@@ -333,10 +334,12 @@ Once activated install esptool:
 ### Linux:
 - ```bash
   python .m venv esp-env
-  source esp-env
+  source esp-env/bin/activate
   ```
 Once activated install esptool:
 - (esp-env) ...$: ```pip install esptool```
 
 ### ESP Tool Docs:
 - [ESP Tool Documentation](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool)
+
+### If you want add Libraries to your build, then copy them to micropython/ports/esp32/modules/ folder all ``*.py`` you want, look the space left, becarefull.
