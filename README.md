@@ -92,7 +92,7 @@ Basado en--Based on:
   ```
   ![CMAKE Install](media/CMAKE_Install.png)
 
-### Regresar un directorio y ejuctar el script para ESP32S3 -- Back a directory and execute the Script for ESP32S3:
+### Regresar un directorio y ejecutar el script para ESP32S3 -- Back a directory and execute the Script for ESP32S3:
 
 - ```bash
   cd ..
