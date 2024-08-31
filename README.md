@@ -342,4 +342,4 @@ Once activated install esptool:
 ### ESP Tool Docs:
 - [ESP Tool Documentation](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool)
 
-### If you want add Libraries to your build, then copy them to micropython/ports/esp32/modules/ folder all ``*.py`` you want, look the space left, becarefull.
+### If you want add Libraries to your build, then copy them to ``micropython/ports/esp32/modules/`` folder all ``*.py`` you want, look the space left, becarefull.
