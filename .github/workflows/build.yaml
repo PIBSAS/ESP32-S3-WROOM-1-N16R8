@@ -12,6 +12,8 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    - cron: '0 0 * * 0'  # Se ejecutará a las 00:00 UTC cada domingo
 
 jobs:
   build:
