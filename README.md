@@ -21,16 +21,16 @@ Basado en--Based on:
 
 # MicroPython ESP32-S3 N16R8
 
-# Probado en--Tested on Ubuntu WSL 2024:
+# Probado en -- Tested on Ubuntu WSL 2024:
 
 - ```bash
   wsl --install Ubuntu
   ```
 ![Wsl](media/Wsl.png)
 
-### Una vez instalado Ubuntu--Once Installed Ubuntu:
+### Una vez instalado Ubuntu -- Once Installed Ubuntu:
 
-#### Actualizar e instalar requerimientos--Update and Install Requirements:
+#### Actualizar e instalar requerimientos -- Update and Install Requirements:
 
 - ```bash
   sudo apt update && sudo apt upgrade -y
@@ -43,7 +43,7 @@ Basado en--Based on:
   ![Dependencias](media/Dependencies.png)
 
 
-### Clonar ésta--Clone this repo, MicroPython y ESP-IDF compatible con MicroPython(En la actualidad "Micropython 1.23" 5.04 a 5.2):
+### Clonar ésta repo -- Clone this repo, MicroPython y ESP-IDF compatible con MicroPython(En la actualidad "Micropython 1.24" 5.04 a 5.2.2):
 
 - ```bash
   git clone https://github.com/PIBSAS/ESP32-S3-WROOM-1-N16R8.git
@@ -81,7 +81,7 @@ Basado en--Based on:
   ```
 
 
-### Instalar CMake mediante--Install CMake with ``idf_tools.py``:
+### Instalar CMake mediante -- Install CMake with ``idf_tools.py``:
 
 - ```bash
   cd esp-idf/tools
@@ -92,8 +92,7 @@ Basado en--Based on:
   ```
   ![CMAKE Install](media/CMAKE_Install.png)
 
-### Regresar un directorio y ejuctar el script para ESP32S3
-### Back a directory and execute the Script for ESP32S3
+### Regresar un directorio y ejuctar el script para ESP32S3 -- Back a directory and execute the Script for ESP32S3:
 
 - ```bash
   cd ..
@@ -101,15 +100,13 @@ Basado en--Based on:
   ```
   ![Install](media/Install.png)
   
-### Ejecutar
-### Run:
+### Ejecutar -- Run:
 - ```bash
   . ./export.sh
   ```
 ![Export Script](media/Export.png)
 
-### Copiar el directorio ``ESP32_GENERIC_S3_N16R8`` y su contenido al directorio boards:
-### Copy recursively ``ESP32_GENERIC_S3_N16R8`` folder and his content to boards folder:
+### Copiar el directorio ``ESP32_GENERIC_S3_N16R8`` y su contenido al directorio boards -- Copy recursively ``ESP32_GENERIC_S3_N16R8`` folder and his content to boards folder:
 
 - ```bash
   cd
@@ -117,8 +114,7 @@ Basado en--Based on:
   ```
 ![Copy](media/Copy_Repo.png)
 
-### Dirigirnos al directorio MicroPython y ejecutar mpy-cross:
-### Go to MicroPython folder and run mpy-cross:
+### Dirigirnos al directorio MicroPython y ejecutar mpy-cross -- Go to MicroPython folder and run mpy-cross:
 
 - ```bash
   cd
@@ -127,34 +123,30 @@ Basado en--Based on:
   ```
 ![Make Mpy](media/Make.png)
 
-### Indicar el ``IDF_TARGET``:
-### Indicate ``IDF_TARGET``:
+### Indicar el ``IDF_TARGET`` -- Indicate ``IDF_TARGET``:
 
 - ```bash
   export IDF_TARGET=esp32s3
   ```
 ![IDF-Target](media/IDF_Target.png)
 
-### Movernos a ports/esp32:
-### Move to ports/esp32:
+### Movernos a -- Move to ```ports/esp32```:
 
 - ```bash
   cd ports/esp32/
   ```
 
-### Compilar MicroPython para ESP32 S3:
-### Compile MicroPython for ESP32 S3:
+### Compilar MicroPython para ESP32 S3 -- Compile MicroPython for ESP32 S3:
 
 - ```bash
   make BOARD=ESP32_GENERIC_S3_N16R8 submodules
   ```
-  ```bash
+- ```bash
   make BOARD=ESP32_GENERIC_S3_N16R8
   ```
 ![Makes](media/Makes.png)
 
-#### Al final con ESP-IDF v5.0.4 nos indica:
-#### At the end show us with ESP-IDF v5.0.4:
+#### Al final con ESP-IDF v5.0.4 nos indica -- At the end show us with ESP-IDF v5.0.4:
 
 - Project build complete. To flash, run this command:
 - ```bash
@@ -173,8 +165,7 @@ Basado en--Based on:
 - Se debe cambiar ``(PORT)`` por ``COM29`` por ejemplo o en linux ``/dev/ttyACM0``
 
 
-#### Al final con ESP-IDF v5.2 nos indica:
-#### At the end show us with ESP-IDF v5.2:
+#### Al final con ESP-IDF v5.2 nos indica -- At the end show us with ESP-IDF v5.2:
 
 - Project build complete. To flash, run this command:
 - ```bash
@@ -182,18 +173,23 @@ Basado en--Based on:
   ```
 ![Success](media/Success_ESP-IDFv5.2.png)
 
+#### Al final con ESP-IDF v5.2.2 nos indica -- At the end show us with ESP-IDF v5.2.2:
+
+- Project build complete. To flash, run this command:
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
+  ```
+  
 # Windows:
 
 ## ESP-IDF v5.0.4:
-### Borramos la flash:
-### Erase flash:
+### Borramos la flash -- Erase flash:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 erase_flash
   ```
 ![Erase Flash](media/Erase.png)
 
-### Luego flasheamos:
-### Then flash:
+### Luego flasheamos -- Then flash:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p COM29 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
@@ -205,23 +201,28 @@ Basado en--Based on:
   python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 
+## ESP-IDF v5.2.2:
+
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
+  ```
+
 # WSL:
 
-## Instalar--Install USBIPD:
+## Instalar -- Install USBIPD:
 
 - ```bash
   winget install --interactive --exact dorssel.usbipd-win
   ```
 
-### Abrir Terminal(Administrador) conectar el ESP32 y escribir:
-### Open Terminasl(Admin) plug ESP32 and type:
+### Abrir Terminal(Administrador) conectar el ESP32 y escribir -- Open Terminasl(Admin) plug ESP32 and type:
 
 - ```bash
   usbipd list
   ```
-- Observar el--See ``BUSID`` del--of esp ``(USB-Enhanced-SERIAL CH343 (COM29)``. Ej: ``2-1``
+- Observar el -- See ``BUSID`` del -- of esp ``(USB-Enhanced-SERIAL CH343 (COM29)``. Ej: ``2-1``
 
-### Escribir--Type:
+### Escribir -- Type:
 
 - ```bash
   usbipd bind --busid 2-1
@@ -231,34 +232,35 @@ Basado en--Based on:
   usbipd attach --wsl --busid 2-1
   ```
 
-### En WSL Ubuntu(Distro) agregar el usuario al grupo ``dialout``:
-### On WSL Ubuntu add user to ``dialout`` group:
+### En WSL Ubuntu(Distro) agregar el usuario al grupo ``dialout`` -- On WSL Ubuntu add user to ``dialout`` group:
 
 - ```bash
   sudo adduser $USER dialout
   ```
 
-### En Terminal(Administrador) Comprobar que figure ``Attached`` en la columna ``STATE`` con:
-### On Teminal(Admin) Verify ``Attached`` on ``STATE`` column with:
+### En Terminal(Administrador) Comprobar que figure ``Attached`` en la columna ``STATE`` con -- On Teminal(Admin) Verify ``Attached`` on ``STATE`` column with:
 
 - ```bash
   usbipd list
   ```
 ## ESP-IDF v5.0.4:
-### Luego en WSL borramos la flash:
-### Then on WSL erase the flash:
+### Luego en WSL borramos la flash -- Then on WSL erase the flash:
 
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 erase_flash
   ```
   
-### Luego flasheamos:
-### Then flash:
+### Luego flasheamos -- Then flash:
 - ```bash
   $HOME/.espressif/python_env/idf5.0_py3.10_env/bin/python ../../../esp/esp-idf/components/esptool_py/esptool/esptool.py -p /dev/ttyACM0 -b 460800 --before default_reset --after no_reset --chip esp32s3  write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```
 
 ## ESP-IDF v5.2:
+- ```bash
+  python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
+  ```  
+
+## ESP-IDF v5.2.2:
 - ```bash
   python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin 0x8000 build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin 0x10000 build-ESP32_GENERIC_S3_N16R8/micropython.bin
   ```  
@@ -281,7 +283,7 @@ Basado en--Based on:
 
 - [micropython/micropython/issues/8635](https://github.com/micropython/micropython/issues/8635#issuecomment-1129218506)
 
-## Resultado--Result:
+## Resultado -- Result:
 ![ESP32-S3-WROOM-1 N16R8 Compilation](Captura.png)
 ### ESP-IDF v5.0.4:
 ![ESP32S3-WROOM-1 N16R8 18Mb RAM 8Mb PSRAM](media/Resultado.png)
