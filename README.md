@@ -146,8 +146,8 @@ Basado en--Based on:
 ### Compile MicroPython for ESP32 S3:
 
 - ```bash
-  make BOARD=GENERIC_S3_N16R8 submodules
-  make BOARD=GENERIC_S3_N16R8
+  make BOARD=ESP32_GENERIC_S3_N16R8 submodules
+  make BOARD=ESP32_GENERIC_S3_N16R8
   ```
 ![Makes](media/Makes.png)
 
