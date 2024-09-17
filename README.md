@@ -347,3 +347,8 @@ Once activated install esptool:
 - [ESP Tool Documentation](https://docs.espressif.com/projects/esptool/en/latest/esp32s3/esptool/index.html#esptool)
 
 ### If you want add Libraries to your build, then copy them to ``micropython/ports/esp32/modules/`` folder all ``*.py`` you want, look the space left, becarefull.
+
+# Smartconfig Apps from:
+- [ESP-Touch for Android](https://www.espressif.com/en/support/download/apps)
+- [ESP-Touch for iOS](https://www.espressif.com/en/support/download/apps)
+- Smartconfig example in smartconfig_example folder in this repo.
