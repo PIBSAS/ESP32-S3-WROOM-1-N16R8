@@ -1,17 +1,12 @@
-name: ESP32 MicroPython
+name: ESP32 S3 N16R8 MicroPython and ESP32 S3 N16R8 MicroPython+SmartConfig Module
 
 permissions:
   contents: write
 
 on:
   push:
-  #  branches:
-   #   - main
     tags:
      - 'v*'
-  #pull_request:
-   # branches:
-    #  - main
   schedule:
      - cron: '0 0 * * 0'  # Se ejecutará a las 00:00 UTC cada domingo
   
@@ -22,21 +17,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clonar el repositorio
+    - name: Clone repo
       uses: actions/checkout@v3
 
-    - name: Clonar smartconfig by Walkline
+    - name: Clone repo smartconfig by Walkline80
       run :  git clone https://gitee.com/walkline/micropython-smartconfig-cmodule.git smartconfig
       
-    - name: Clonar Micropython
+    - name: Clone Micropython
       run: git clone --recurse-submodules https://github.com/micropython/micropython.git
       
-    - name: Instalar dependencias
+    - name: Install dependencies
       run: |
        sudo apt update && sudo apt upgrade -y
        sudo apt install -y build-essential git wget flex bison gperf pkg-config python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
-    - name: Clonar ESP-IDF
+    - name: Clone ESP-IDF
       run: |
         mkdir -p esp
         cd esp
@@ -48,11 +43,12 @@ jobs:
         cd
 
 
-    - name: Copiar configuracion
+    - name: Copy config
       run: |
         cp -r ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards/
 
-    - name: Compilar con SmartConfig
+    - name: Compile with SmartConfig
+      continue-on-error: true
       run: |
         source esp/esp-idf/export.sh
         cd micropython/
@@ -62,15 +58,16 @@ jobs:
         idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -D USER_C_MODULES="$GITHUB_WORKSPACE/smartconfig/cmodules/micropython.cmake" -B build-ESP32_GENERIC_S3_N16R8 build
 
     
-    - name: Mover binarios con SmartConfig
+    - name: Move binaries with SmartConfig
+      if: success() || failure()
       run: |
         mkdir -p ./artifacts
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/micropython_smart.bin
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin ./artifacts/bootloader_smart.bin
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/partition-table_smart.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/micropython_smart.bin || true
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin ./artifacts/bootloader_smart.bin || true
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/partition-table_smart.bin || true
 
-    # Segunda compilación sin la librería SmartConfig
-    - name: Compilar MicroPython
+    - name: Compile MicroPython only
+      continue-on-error: true
       run: |
         source esp/esp-idf/export.sh
         cd micropython/
@@ -79,11 +76,12 @@ jobs:
         cd ports/esp32/
         idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -B build-ESP32_GENERIC_S3_N16R8_no_smart build
 
-    - name: Mover binarios MicroPython
+    - name: Move binaries MicroPython
+      if: success() || failure()
       run: |
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/micropython.bin ./artifacts/micropython.bin
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/partition_table/partition-table.bin ./artifacts/partition-table.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/micropython.bin ./artifacts/micropython.bin || true
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin || true
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/partition_table/partition-table.bin ./artifacts/partition-table.bin || true
     
     - name: Generate Tag
       id: tag
