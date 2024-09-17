@@ -24,6 +24,9 @@ jobs:
     steps:
     - name: Clonar el repositorio
       uses: actions/checkout@v3
+
+    - name: Clonar smartconfig by Walkline
+      run :  git clone https://gitee.com/walkline/micropython-smartconfig-cmodule.git smartconfig
       
     - name: Clonar Micropython
       run: git clone --recurse-submodules https://github.com/micropython/micropython.git
@@ -56,7 +59,7 @@ jobs:
         make -C mpy-cross
         export IDF_TARGET=esp32s3
         cd ports/esp32/
-        idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -B build-ESP32_GENERIC_S3_N16R8 build
+        idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -D USER_C_MODULES="$GITHUB_WORKSPACE/smartconfig/cmodules/micropython.cmake" -B build-ESP32_GENERIC_S3_N16R8 build
 
     
     - name: Mover binarios
