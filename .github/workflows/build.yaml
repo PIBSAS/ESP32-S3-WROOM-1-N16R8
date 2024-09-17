@@ -52,7 +52,7 @@ jobs:
       run: |
         cp -r ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards/
 
-    - name: Compilar
+    - name: Compilar con SmartConfig
       run: |
         source esp/esp-idf/export.sh
         cd micropython/
@@ -62,13 +62,29 @@ jobs:
         idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -D USER_C_MODULES="$GITHUB_WORKSPACE/smartconfig/cmodules/micropython.cmake" -B build-ESP32_GENERIC_S3_N16R8 build
 
     
-    - name: Mover binarios
+    - name: Mover binarios con SmartConfig
       run: |
         mkdir -p ./artifacts
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin ./artifacts/
-        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/micropython_smart.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/bootloader/bootloader.bin ./artifacts/bootloader_smart.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/partition-table_smart.bin
 
+    # Segunda compilación sin la librería SmartConfig
+    - name: Compilar MicroPython
+      run: |
+        source esp/esp-idf/export.sh
+        cd micropython/
+        make -C mpy-cross
+        export IDF_TARGET=esp32s3
+        cd ports/esp32/
+        idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -B build-ESP32_GENERIC_S3_N16R8_no_smart build
+
+    - name: Mover binarios MicroPython
+      run: |
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/micropython.bin ./artifacts/micropython.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin
+        cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/partition_table/partition-table.bin ./artifacts/partition-table.bin
+    
     - name: Generate Tag
       id: tag
       run: echo "TAG_NAME=release-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
