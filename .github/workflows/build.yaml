@@ -108,7 +108,90 @@ jobs:
       with:
         tag_name: ${{ env.TAG_NAME }}
         name: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
-        body: "Automated release for MicroPython with SmartConfig."
+        body: |
+          Automated release for MicroPython with SmartConfig.
+          - What we get here:
+             - ```micropython.bin, bootloader.bin and partition-table.bin are MicroPython itslef by default, without SmartConfig module.```
+             - ```micropython_smart.bin, bootloader_smart.bin and partition-table_smart.bin are MicroPython + SmartConfig module.```
+          
+          # Instructions
+          
+          You need to have some dependencies pre-instaled in your OS:
+          - Python 3
+          - Pip
+          - Python VENV
+          
+          ## Windows:
+          ````bash
+          python -m venv esp-env
+          ````
+          
+          ````bash
+          .\esp-env\Scripts\activate
+          ````
+          
+          or
+          
+          ````bash
+          py -m venv esp-env
+          ````
+          
+          ````bash
+          .\esp-env\Scripts\activate
+          ````
+          
+          ### Then install esptool:
+          ````bash
+          pip install esptool
+          ````
+          
+          ### Put ESP32-S3-WROOM-1 N16R8 in BOOTLOADER MODE:
+          - With USB cable on USB COM Port, press BOOT button then RST button, release RST, then release BOOT button. Or unplug, press BOOT button meanwhile you plug in the usb cable to PC or SBC like a Raspberry Pi.
+          
+          ### Erase and Flash:
+          #### Step for MicroPython.
+          - Put 3 binaries in the same folder you are executing the steps, example Downloads folder, you need to be in that folder where are the binaries.
+          ````bash
+          python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader.bin 0x8000 partition-table.bin 0x10000 micropython.bin
+          ````
+          
+          #### Step for MicroPython+SmartConfig:
+          - Put 3 binaries in the same folder you are executing the steps, example Downloads folder, you need to be in that folder where are the binaries.
+          ````bash
+          python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader_smart.bin 0x8000 partition-table_smart.bin 0x10000 micropython_smart.bin
+          ````
+          
+          ## Linux:
+          
+          ````bash
+          python -m venv esp-env
+          ````
+          
+          ````bash
+          source esp-env/bin/activate
+          ````
+          
+          ### Then install esptool:
+          ````bash
+          pip install esptool
+          ````
+          
+          ### Put ESP32-S3-WROOM-1 N16R8 in BOOTLOADER MODE:
+          - With USB cable on USB COM Port, press BOOT button then RST button, release RST, then release BOOT button. Or unplug, press BOOT button meanwhile you plug in the usb cable to PC or SBC like a Raspberry Pi.
+          
+          ### Erase and Flash:
+          #### Step for MicroPython:
+          - Put 3 binaries in the same folder you are executing the steps, example Downloads folder, you need to be in that folder where are the binaries.
+          ````bash
+          python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader.bin 0x8000 partition-table.bin 0x10000 micropython.bin
+          ````
+          
+          #### Step for MicroPython+SmartConfig:
+          - Put 3 binaries in the same folder you are executing the steps, example Downloads folder, you need to be in that folder where are the binaries.
+          ````bash
+          python -m esptool --chip esp32s3 -b 460800 --before default_reset --after no_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 bootloader_smart.bin 0x8000 partition-table_smart.bin 0x10000 micropython_smart.bin
+          ````
+          
         draft: false
         prerelease: false
         files: ./artifacts/*
