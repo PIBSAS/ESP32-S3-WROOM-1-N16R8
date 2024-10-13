@@ -93,5 +93,5 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
         automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
-        title: "Release for version ${{ env.TAG_NAME }}"
+        title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.TAG_NAME }}"
         files: ./artifacts/*
