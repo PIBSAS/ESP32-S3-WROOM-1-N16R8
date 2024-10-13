@@ -28,7 +28,7 @@ jobs:
       
     - name: Install dependencies
       run: |
-       sudo apt update && sudo apt upgrade -y
+       sudo apt update
        sudo apt install -y build-essential git wget flex bison gperf pkg-config python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
     - name: Clone ESP-IDF
@@ -83,10 +83,20 @@ jobs:
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin || true
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/partition_table/partition-table.bin ./artifacts/partition-table.bin || true
 
-    - name: Get MicroPython Version
+    - name: Get MicroPython Version from mpconfig.h
       run: |
         cd micropython/
-        MPY_VERSION=$(grep -oP '(?<=#define MICROPY_GIT_TAG ")[^"]+' py/mpconfig.h)
+        MAJOR=$(grep -oP '(?<=#define MICROPY_VERSION_MAJOR )[0-9]+' py/mpconfig.h)
+        MINOR=$(grep -oP '(?<=#define MICROPY_VERSION_MINOR )[0-9]+' py/mpconfig.h)
+        MICRO=$(grep -oP '(?<=#define MICROPY_VERSION_MICRO )[0-9]+' py/mpconfig.h)
+        PRERELEASE=$(grep -oP '(?<=#define MICROPY_VERSION_PRERELEASE )[0-9]+' py/mpconfig.h)
+
+        if [ "$PRERELEASE" -eq 1 ]; then
+          MPY_VERSION="$MAJOR.$MINOR.$MICRO-preview"
+        else
+          MPY_VERSION="$MAJOR.$MINOR.$MICRO"
+        fi
+
         echo "MPY_VERSION=$MPY_VERSION" >> $GITHUB_ENV
 
     - name: Generate Tag
