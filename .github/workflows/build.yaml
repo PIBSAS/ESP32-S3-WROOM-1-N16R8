@@ -103,11 +103,23 @@ jobs:
       id: tag
       run: echo "TAG_NAME=release-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
       
-    - name: Create Release
-      uses: marvinpinto/action-automatic-releases@latest
+    - name: GH Release
+      uses: softprops/action-gh-release@v2.0.8
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        tag_name: ${{ env.TAG_NAME }}
+        name: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
+        body: "Automated release for MicroPython with SmartConfig."
+        draft: false
         prerelease: false
-        automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
-        title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
         files: ./artifacts/*
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    #- name: Create Release
+      #uses: marvinpinto/action-automatic-releases@latest
+      #with:
+       # repo_token: "${{ secrets.GITHUB_TOKEN }}"
+       # prerelease: false
+        #automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
+        #title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
+        #files: ./artifacts/*
