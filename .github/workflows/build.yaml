@@ -114,12 +114,3 @@ jobs:
         files: ./artifacts/*
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        
-    #- name: Create Release
-      #uses: marvinpinto/action-automatic-releases@latest
-      #with:
-       # repo_token: "${{ secrets.GITHUB_TOKEN }}"
-       # prerelease: false
-        #automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
-        #title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
-        #files: ./artifacts/*
