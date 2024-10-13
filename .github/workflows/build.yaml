@@ -82,7 +82,13 @@ jobs:
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/micropython.bin ./artifacts/micropython.bin || true
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin || true
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/partition_table/partition-table.bin ./artifacts/partition-table.bin || true
-    
+
+    - name: Get MicroPython Version
+      run: |
+        cd micropython/
+        MPY_VERSION=$(grep -oP '(?<=#define MICROPY_GIT_TAG ")[^"]+' py/mpconfig.h)
+        echo "MPY_VERSION=$MPY_VERSION" >> $GITHUB_ENV
+
     - name: Generate Tag
       id: tag
       run: echo "TAG_NAME=release-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
@@ -93,5 +99,5 @@ jobs:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
         prerelease: false
         automatic_release_tag: ${{ env.TAG_NAME }}  # Usa el nombre del tag generado
-        title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.TAG_NAME }}"
+        title: "MicroPython ESP32 S3 WROOM 1 N16R8 plus Smartconfig Release version ${{ env.MPY_VERSION }} (Build ${{ env.TAG_NAME }})"
         files: ./artifacts/*
