@@ -35,7 +35,7 @@ jobs:
       run: |
         mkdir -p esp
         cd esp
-        git clone -b v5.3.2 --recursive https://github.com/espressif/esp-idf.git
+        git clone -b v5.4 --recursive https://github.com/espressif/esp-idf.git
         cd esp-idf/tools
         python3 idf_tools.py install cmake
         cd ..
