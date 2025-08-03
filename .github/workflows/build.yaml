@@ -8,9 +8,9 @@ on:
     tags:
      - 'v*'
   schedule:
-     - cron: '0 0 * * 0'  # Se ejecutará a las 00:00 UTC cada domingo
+     - cron: '0 0 */14 * *'
   
-  workflow_dispatch:  # Permite ejecutar manualmente el flujo de trabajo
+  workflow_dispatch:
 
 jobs:
   build:
@@ -47,8 +47,12 @@ jobs:
       run: |
         cp -r ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards/
 
+    - name: Copiar tabla de particiones personalizada
+      run: |
+        cp "$GITHUB_WORKSPACE/ESP32_GENERIC_S3_N16R8/partitions-16MiB.csv" "$GITHUB_WORKSPACE/micropython/ports/esp32/partitions-16MiB.csv"
+
     - name: Compile with SmartConfig
-      continue-on-error: true
+      #continue-on-error: true
       run: |
         source esp/esp-idf/export.sh
         cd micropython/
@@ -59,7 +63,7 @@ jobs:
 
     
     - name: Move binaries with SmartConfig
-      if: success() || failure()
+      #if: success() || failure()
       run: |
         mkdir -p ./artifacts
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/micropython.bin ./artifacts/micropython_smart.bin || true
@@ -67,7 +71,7 @@ jobs:
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8/partition_table/partition-table.bin ./artifacts/partition-table_smart.bin || true
 
     - name: Compile MicroPython only
-      continue-on-error: true
+      #continue-on-error: true
       run: |
         source esp/esp-idf/export.sh
         cd micropython/
@@ -77,7 +81,7 @@ jobs:
         idf.py -D MICROPY_BOARD=ESP32_GENERIC_S3_N16R8 -D MICROPY_BOARD_DIR="$GITHUB_WORKSPACE/micropython/ports/esp32/boards/ESP32_GENERIC_S3_N16R8" -B build-ESP32_GENERIC_S3_N16R8_no_smart build
 
     - name: Move binaries MicroPython
-      if: success() || failure()
+      #if: success() || failure()
       run: |
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/micropython.bin ./artifacts/micropython.bin || true
         cp micropython/ports/esp32/build-ESP32_GENERIC_S3_N16R8_no_smart/bootloader/bootloader.bin ./artifacts/bootloader.bin || true
