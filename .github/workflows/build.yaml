@@ -1,4 +1,4 @@
-name: ESP32 S3 N16R8 MicroPython and ESP32 S3 N16R8 MicroPython+SmartConfig Module
+name: ESP32 S3 N16R8 MicroPython only and ESP32 S3 N16R8 MicroPython + SmartConfig Module
 
 permissions:
   contents: write
@@ -43,7 +43,7 @@ jobs:
         cd
 
 
-    - name: Copy config
+    - name: Copy board configuration
       run: |
         cp -r ESP32_GENERIC_S3_N16R8 micropython/ports/esp32/boards/
 
@@ -106,7 +106,25 @@ jobs:
     - name: Generate Tag
       id: tag
       run: echo "TAG_NAME=release-$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
-      
+
+    - name: Verificar existencia de todos los binarios
+      run: |
+        REQUIRED_FILES=(
+          ./artifacts/micropython.bin
+          ./artifacts/bootloader.bin
+          ./artifacts/partition-table.bin
+          ./artifacts/micropython_smart.bin
+          ./artifacts/bootloader_smart.bin
+          ./artifacts/partition-table_smart.bin
+        )
+    
+        for FILE in "${REQUIRED_FILES[@]}"; do
+          if [ ! -f "$FILE" ]; then
+            echo "Falta el archivo: $FILE"
+            exit 1
+          fi
+        done
+            
     - name: GH Release
       uses: softprops/action-gh-release@v2.0.8
       with:
